@@ -1,0 +1,16 @@
+service: serverless-layer-sample # NOTE: update this with your service name
+provider:
+  name: aws
+  runtime: python3.7
+layers:
+  saylayer:
+    path: layers
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: hello
+          method: get
+    layers:
+      - {Ref: SaylayerLambdaLayer}
